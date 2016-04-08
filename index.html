@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sungka</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Start Horizontal version -->
+  <div id="div_modal" class="hidden">
+    <img id="modal_img" src="ToDo1.png"/>
+    <div id="modal_close_position">
+      <div>
+        <i id="modal_close" class="fa fa-times-circle"></i>
+        <p id="modal_close" class="small">Close</p>
+      </div>
+    </div>
+    <div id="modal_previous_position" class="hidden">
+      <div>
+        <i id="modal_previous" class="fa fa-arrow-circle-left"></i>
+        <p id="modal_previous" class="small">Previous</p>
+      </div>
+    </div>
+    <div>
+      <div id="modal_next_position">
+        <i id="modal_next" class="fa fa-arrow-circle-right"></i>
+        <p id="modal_next" class="small">Next</p>
+      </div>
+    </div>
+  </div>
+  <div id="horizontal_version">
+  	<div id=div_top>
+  		Sungka
+  	</div>
+  	<div id="div_sub_top">
+  		<h2 id="div_turn">Player 1's Turn</h2>
+      <div id="div_hand">Start</div>
+  	</div>
+  	<div id="div_gameboard">
+  		<div id="div_15" class="player_store">0</div>
+  		<div id="div_row_container">
+  			<div id="div_enemy_row">
+  				<div id="div_14" class="enemy house">7</div>
+  				<div id="div_13" class="enemy house">7</div>
+  				<div id="div_12" class="enemy house">7</div>
+  				<div id="div_11" class="enemy house">7</div>
+  				<div id="div_10" class="enemy house">7</div>
+  				<div id="div_9" class="enemy house">7</div>
+  				<div id="div_8" class="enemy house">7</div>
+  			</div>
+  			<div id="div_player_row">
+  				<div id="div_0" class="player house">7</div>
+  				<div id="div_1" class="player house">7</div>
+  				<div id="div_2" class="player house">7</div>
+  				<div id="div_3" class="player house">7</div>
+  				<div id="div_4" class="player house">7</div>
+  				<div id="div_5" class="player house">7</div>
+  				<div id="div_6" class="player house">7</div>
+  			</div>
+  		</div>
+  		<div id="div_7" class="enemy_store">0</div>
+  	</div>
+  	<div id="div_message">Player 1, click a blue circle to make a move.</div>
+    <div id="div_stats" class="hidden">
+      <div class="inline-block">
+        <h3>Player 1</h3>
+        <ul id="player1_stats">
+          <li>Continuous Steps: 0 - Max: 0</li>
+          <li>Chained Turns: 0 - Max: </li>
+          <li>Max Bonus: 0</li>
+          <li>Max Score: 0</li>
+        </ul>
+      </div>
+      <div class="inline-block">
+        <h3>Player 2</h3>
+        <ul id="player2_stats">
+          <li>Continuous Steps: 0 - Max: 0</li>
+          <li>Chained Turns: 0 - Max: </li>
+          <li>Max Bonus: 0</li>
+          <li>Max Score: 0</li>
+        </ul>
+      </div>
+      <div class="inline-block">
+        <h3>Computer</h3>
+        <ul id="computer_stats">
+          <li>Continuous Steps: 0 - Max: 0</li>
+          <li>Chained Turns: 0 - Max: </li>
+          <li>Max Bonus: 0</li>
+          <li>Max Score: 0</li>
+        </ul>
+      </div>
+    </div>
+    <ul id="ul_menu">
+      <li id="li_two_player" class="menu">
+        <i id="li_two_player" class="fa fa-user"></i>v<i id="li_two_player" class="fa fa-user"></i>
+        <p id="li_two_player" class="small">2-Player</p>
+      </li>
+      <li id="li_use_computer" class="selected menu">
+        <i id="li_use_computer" class="fa fa-user"></i>v<i id="li_use_computer" class="fa fa-laptop"></i>
+        <p id="li_use_computer" class="small">Computer</p>
+      </li>
+      <li id="li_reset" class="menu">
+        <i id ="li_reset" class="fa fa-rotate-left"></i>
+        <p id ="li_reset" class="small">Reset</p>
+      </li>
+      <li id="li_how_to_menu" class="menu">
+        <i id="li_how_to_menu" class="fa fa-question"></i>
+        <p id="li_how_to_menu" class="small">How To Play</p>
+      </li>
+      <li id="li_stats_menu" class="menu">
+        <i id="li_stats_menu" class="fa fa-list"></i>
+        <p id="li_stats_menu" class="small">Statistics</p>
+      </li>
+      <a href="https://en.wikipedia.org/wiki/Congkak" target="_blank">
+        <li id="li_about_menu" class="menu">
+         <i class="fa fa-wikipedia-w"></i>
+         <p class="small">Wikipedia</p>
+        </li>
+      </a>
+    </ul>
+  </div>
+  <!-- End Horizontal version -->
+  <script src="script.js"></script>
+</body>
+</html>
