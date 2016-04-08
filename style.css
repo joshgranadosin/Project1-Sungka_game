@@ -57,6 +57,19 @@ img {
 	margin: 0;
 }
 
+#modal_opt_out_position {
+	display: inline;
+	position: fixed;
+	bottom: 0;
+	bottom-margin: 0;
+	left: 37%;
+	font-size: 14px;
+}
+
+.checkbox {
+	padding-right: 10px;
+}
+
 #modal_next_position {
 	display: block;
 	position: fixed;

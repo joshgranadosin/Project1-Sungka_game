@@ -101,21 +101,38 @@ Stats.prototype.addTurn = function(){
 	if(this.turns > this.maxTurn){
 		this.maxTurn = this.turns;
 	}
+	this.store();
 	this.update();
 }
 Stats.prototype.addMaxScore = function(x){
 	if(x > this.maxScore){
 		this.maxScore = x;
 	}
+	this.store();
 	this.update();
 }
 Stats.prototype.addMaxBonus = function(x){
 	if(x > this.maxBonus){
 		this.maxBonus = x;
 	}
+	this.store();
 	this.update();
 }
-
+Stats.prototype.store = function(){
+	var str = this.maxStep + "," + this.maxTurn + "," + this.maxScore + "," + this.maxBonus;
+	localStorage.setItem(this.player,str);
+}
+Stats.prototype.retrieve = function(){
+	if(localStorage.getItem(this.player) != null){
+		var str = localStorage.getItem(this.player);
+		var strSplit = str.split(",",4);
+		this.maxStep = parseInt(strSplit[0],10);
+		this.maxTurn = parseInt(strSplit[1],10);
+		this.maxScore = parseInt(strSplit[2],10);
+		this.maxBonus = parseInt(strSplit[3],10);
+		this.update();
+	}
+}
 
 var player1Stats = new Stats("player1", 0, 0, 0, 0);
 var player2Stats = new Stats("player2", 0, 0, 0, 0);
@@ -179,6 +196,8 @@ var modalPrev = document.getElementById("modal_previous_position");
 var modalNext = document.getElementById("modal_next_position");
 var modalClose = document.getElementById("modal_close_position");
 
+var optedOut;
+
 /*------------------------------------------------------------------------*/
 /*-------------------- EVENT HANLDERS --------------------*/
 /*------------------------------------------------------------------------*/
@@ -205,6 +224,8 @@ var modalHandler = document.getElementById("div_modal");
 modalHandler.addEventListener("click", function(){  /* debug code */ if(debug){console.log(event.target.id + " clicked");}
 	handleModal(event);
 });
+
+var optOutCheck = document.getElementsByClassName("checkbox");
 
 // Actual handler
 var handler = function(event){ /* debug code */ if(debug){console.log("handler()");}
@@ -301,6 +322,16 @@ var handleModal = function(){
 	else if (event.target.id === "modal_close"){
 		modalHandler.classList.toggle("hidden");
 	}
+	else if (event.target.id === "modal_opt_out"){
+		optedOut = !optedOut;
+		if(optedOut){
+			optOutCheck[0].className = "checkbox fa fa-check-square-o";
+			localStorage.optedOut = "true";
+		} else {
+			optOutCheck[0].className = "checkbox fa fa-square-o";
+			localStorage.optedOut = "false";
+		}
+	}
 
 	if (modalPage === 1){
 		modalPrev.className = "hidden";
@@ -313,7 +344,27 @@ var handleModal = function(){
 		modalNext.className = "";
 	}
 }
+/*------------------------------------------------------------------------*/
+/*-------------------- LOCAL STORAGE FUNCTIONS --------------------*/
+/*------------------------------------------------------------------------*/
+var initializeTutorial = function(){
+	if(localStorage.optedOut === "true"){
+		optedOut = true;
+		modalHandler.className = "hidden";
+		optOutCheck[0].className = "checkbox fa fa-check-square-o";
+	}
+	else {
+		optedOut = false;
+		modalHandler.className = "";
+		optOutCheck[0].className = "checkbox fa fa-square-o";
+	}
+}
 
+var retrieveStats = function(){
+	player1Stats.retrieve();
+	player2Stats.retrieve();
+	computerStats.retrieve();
+}
 
 /*------------------------------------------------------------------------*/
 /*-------------------- MAIN GAMEPLAY FUNCTIONS --------------------*/
@@ -324,6 +375,7 @@ var emptyHand = function(){ /* debug code */ if(debug){console.log("--Calling Fu
 	var currentStoreIndex;
 	var inOwnSide;
 	var isTurnEnd = true;
+	addMaxScoreCurrentPlayer();
 	if(isPlayerTurn) {
 		currentStoreIndex = PLAYERSTOREINDEX;
 		inOwnSide = (gameboard[index].type === "playerHouse");
@@ -469,6 +521,7 @@ var step = function(){ /* debug code */ if(debug){console.log("--Calling Functio
 // function for switching between players
 var switchTurns = function(){ /* debug code */ if(debug){console.log("--Calling Function:switchTurns");}
 	isPlayerTurn = !isPlayerTurn;
+	addMaxScoreCurrentPlayer();
 	resetTurnStepCount();
 	/* debug code */ if(debug){console.log("isPlayerTurn = " + isPlayerTurn);}
 	if(isGameOver()){
@@ -575,6 +628,17 @@ var addStepCurrentPlayer = function(){
 	}
 	else {
 		player2Stats.addStep();
+	}
+}
+var addMaxScoreCurrentPlayer = function(){
+	if (isPlayerTurn){
+		player1Stats.addMaxScore(gameboard[PLAYERSTOREINDEX].beads);
+	}
+	else if (!isPlayerTurn && useComputer){
+		computerStats.addMaxScore(gameboard[ENEMYSTOREINDEX].beads);
+	}
+	else {
+		player2Stats.addMaxScore(gameboard[ENEMYSTOREINDEX].beads);
 	}
 }
 var resetTurnStepCount = function(){
@@ -822,12 +886,9 @@ var reset = function(){
 	divMessage.textContent = "Player 1, click a blue circle to make a move.";
 	allowPlayerInput();
 }
+
+// Initialize
+initializeTutorial();
 allowPlayerInput();
-
-
-
-
-
-
-
+retrieveStats();
 
