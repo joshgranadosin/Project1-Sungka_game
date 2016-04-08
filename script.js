@@ -1,4 +1,6 @@
-/* debug code */ var debug = true;
+(function(){
+
+/* debug code */ var debug = false;
 
 /*------------------------------------------------------------------------*/
 /*-------------------- HOUSE CONSTRUCTORS AND METHODS --------------------*/
@@ -892,3 +894,4 @@ initializeTutorial();
 allowPlayerInput();
 retrieveStats();
 
+})();
