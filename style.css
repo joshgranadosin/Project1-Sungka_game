@@ -246,7 +246,7 @@ img {
 
 #ul_menu {
 	width: 100%;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	padding: 0;
 	text-align: center;
@@ -261,4 +261,10 @@ img {
 	font-size: 14px !important;
 	margin: -5px;
 	font-family: helvetica;
+}
+
+div#horizontal_version{
+	padding-top: 10vh;
+	padding-bottom: 10vh;
+	display: block;
 }
